@@ -2,11 +2,10 @@
 title: Meet the team
 ---
 
-This project was developed by **team name** for [STA 199: Introduction to Data Science](https://sta199-f26.github.io/) at Duke University.
+This project was developed by **The Statsbusters** for [STA 199: Introduction to Data Science](https://sta199-f26.github.io/) at Duke University.
 The team is comprised of the following team members.
 
--   Team member 1: One-sentence description of team member 1 (e.g., year, major, etc.). Optionally, hyperlink the team name to the homepage or social profile (LinkedIn, etc.) of the team member.
--   Team member 2: One-sentence description of team member 2 (e.g., year, major, etc.). Optionally, hyperlink the team name to the homepage or social profile (LinkedIn, etc.) of the team member.
--   Team member 3: One-sentence description of team member 3 (e.g., year, major, etc.). Optionally, hyperlink the team name to the homepage or social profile (LinkedIn, etc.) of the team member.
--   Team member 4: One-sentence description of team member 4 (e.g., year, major, etc.). Optionally, hyperlink the team name to the homepage or social profile (LinkedIn, etc.) of the team member.
--   ...
+-   Erin Gilbert: Senior majoring in Physics, who joined the team after realizing that the unexplained phenomena she studies are mostly missing data.
+-   Abby Yates: Junior majoring in Biology with a minor in Statistical Science, and the team's most enthusiastic believer that every dataset is hiding something.
+-   Jillian Holtzmann: Sophomore majoring in Mechanical Engineering, who builds the team's ggplot themes with the same energy she brings to her proton packs.
+-   Patty Tolan: First-year student planning to major in History, who knows every city in the dataset and checks that our numbers make sense in the real world.
