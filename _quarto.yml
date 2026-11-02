@@ -15,7 +15,7 @@ website:
   announcement:
     icon: info-circle
     dismissable: false
-    content: "**Disclaimer:** This is a sample project created by the [STA 199](https://sta199-f26.github.io/) teaching team for illustration purposes. The team members are fictional characters, and this is not a student submission."
+    content: "**Disclaimer:** This is a sample project created by the [STA 199](https://sta199-f26.github.io/) teaching team for illustration purposes. The team members are fictional characters, and this is not a student submission. This is not necessarily an example of a project that would score highly on the project, do not use it as a model for project content."
     type: warning
     position: below-navbar
   navbar:
