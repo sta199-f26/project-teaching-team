@@ -32,8 +32,6 @@ website:
         href: contract.qmd
       - text: AI Disclosure
         href: ai-disclosure.qmd
-      - text: AI Disclosure
-        href: ai-disclosure.qmd
     right:
       - icon: github
         href: "https://github.com/sta199-f26/project-teaching-team"
