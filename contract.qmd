@@ -14,11 +14,14 @@ This is your opportunity to share your thoughts and ideas to promote optimal tea
 
 -   What are your team goals for this project?
 
-Discuss as a team and add your response here.
+Our goal is to produce a clear, honest, and reproducible exploratory analysis that we are all proud of and that every one of us can explain from start to finish.
+We aim to submit every milestone on time, and to use the feedback from each milestone to improve the next one rather than leaving all revisions until the end.
 
 -   What do you want to accomplish? What skills do you want to develop or refine?
 
-Discuss as a team and add your response here.
+We want to answer a real question with real, messy data and to tell a cohesive story about what we find.
+The skills we most want to develop are data wrangling with the tidyverse, building clear and well-labeled visualizations with ggplot2, writing about data concisely, and collaborating with Git and GitHub without losing each other's work.
+Erin and Patty want to get more comfortable with Git, and Abby and Holtzmann want to practice writing for a non-technical audience.
 
 # Expectations
 
@@ -26,21 +29,29 @@ Discuss as a team and add your response here.
 
 -   Meeting times: Identify a 1 - 2 hour weekly block outside of lab where the team can meet to work on assignments. All team members should block off this time on their calendar in case the team needs to meet to work on the project. Note: If you are unable to find a weekly time when the team can meet, briefly outline a plan to work on assignments outside of lab.
 
-Discuss as a team and add your response here.
+We will meet every Wednesday from 4:00 to 5:30 pm.
+All four of us have blocked this time on our calendars.
+If there is nothing to work on in a given week, we will cancel by Tuesday evening in our group chat.
 
 -   Meeting location: Identify how or where the team will meet to work together (e.g. in-person, Zoom, Facetime, Google Hangouts). Be sure every member is able to access the in-person and/or virtual meeting space.
 
-Discuss as a team and add your response here.
+We will meet in person in a group study room on the third floor of Perkins Library, which we will reserve each Monday (Abby is responsible for the reservation).
+If a room is not available, or if someone cannot attend in person, we will meet on Zoom using Erin's recurring meeting link, which is pinned in our group chat.
+All four of us have confirmed that we can access both spaces.
 
 ## Communication
 
 -   Method of communication: Identify the team's primary method of communication outside of meetings (e.g. GroupMe, Slack, text messages, etc.). Be sure all members are able to access the team's chosen communication platform.
 
-Discuss as a team and add your response here.
+Our primary method of communication is a GroupMe group chat called "Statsbusters."
+We will use it for scheduling, quick questions, and letting each other know before we push changes to shared files.
+We will use GitHub issues for project-specific tasks and feedback, so that decisions about the project are recorded next to the code.
+We agree to respond to messages within 24 hours on weekdays.
 
 -   Notifying team members: How should someone notify the other members if they are unable to attend lab or a scheduled team meeting?
 
-Discuss as a team and add your response here.
+If someone cannot attend lab or a team meeting, they will post in the group chat at least 24 hours in advance, or as soon as possible in case of illness or an emergency.
+They will also say what they were working on and when they will catch up, and will read the meeting notes we keep in a shared document afterward.
 
 ## Workflow
 
@@ -48,40 +59,53 @@ While it's not productive to divvy up the entire project work at the beginning a
 
 -   By when should everyone have their portion of the work completed? *Keep in mind your team will want to have time to review each portion before turning it in to make sure all pieces make sense together and any writing is cohesive.*
 
-Discuss as a team and add your response here.
+Individual portions of the work should be committed and pushed to GitHub at least 48 hours before the milestone deadline.
+We will use the following 24 hours to read each other's work, render the full project together, and make the writing cohesive, leaving the final day as a buffer for fixes.
 
 -   How should team members communicate if they're struggling with the portion of the work assigned to them?
 
-Discuss as a team and add your response here.
+Anyone who is struggling with their portion should post in the group chat as soon as they realize it, and no later than 72 hours before the deadline, explaining what they have tried.
+Whoever has capacity will help, either in the chat or by pairing on it at our Wednesday meeting.
+If none of us can solve the problem, we will post on Ed or go to office hours together.
+Asking for help early is always better than missing a deadline.
 
 # Policies & procedures
 
 What rules can you agree on to help you meet your goals and expectations?
 
-Discuss as a team and add your response here.
+-   Always pull before starting work, and commit small changes often with informative commit messages.
+-   Post in the group chat before editing shared code, such as the data cleaning code cell, to avoid merge conflicts.
+-   Render the whole project and confirm that it runs without errors before pushing.
+-   Each team member reviews at least one other member's section before every milestone deadline.
+-   Major decisions, such as choosing the dataset or the research question, are made together at a team meeting, not by one person.
+-   Every member should be able to explain every part of the project, including code they did not write.
+-   We will follow the course AI policy and disclose any use of AI tools on the AI Disclosure page.
+-   We will rotate the role of note-taker at each meeting, in alphabetical order by first name.
 
 # Consequences
 
 How will you address non-performance in regard to these goals, expectations, policies and procedures?
 
-Discuss as a team and add your response here.
+If a team member misses a deadline or a meeting without notice, we will first check in with them privately in a direct message to see if something is going on, since there may be a reason we do not know about.
+If it happens again, we will discuss it as a team at our next meeting and agree on a concrete plan for that person to catch up, with a specific date.
+If the problem continues after that, we will contact the TA in our lab section, and we will reflect it honestly in our peer evaluations.
 
 # Additional items
 
 Use the remaining space for any other items the team would like to discuss or plan out.
 
-Discuss as a team and add your response here.
+-   Holtzmann will set up a shared ggplot theme early so that our visualizations are consistent.
+-   Patty will keep a running list of questions for the teaching team in a GitHub issue, so we can bring them to office hours.
+-   We will celebrate the end of the project with a team dinner after our presentation.
 
 --------------------------------------------------------------------------------
 
 We share these goals and expectations, and agree to these policies, procedures, and consequences.
 
-Team member name:
+Team member name: Erin Gilbert
 
-Team member name:
+Team member name: Abby Yates
 
-Team member name:
+Team member name: Jillian Holtzmann
 
-Team member name:
-
-...
+Team member name: Patty Tolan
