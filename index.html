@@ -11,7 +11,7 @@
 <meta name="author" content="Jillian Holtzmann">
 <meta name="author" content="Patty Tolan">
 
-<title>Add project title here – The Statsbusters</title>
+<title>Bigger city, farther pharmacy? – The Statsbusters</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,7 +30,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -321,8 +340,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Add project title here</h1>
-<p class="subtitle lead">Report</p>
+<h1 class="title">Bigger city, farther pharmacy?</h1>
+<p class="subtitle lead">Report on walkable pharmacy access in urban centres worldwide</p>
 </div>
 
 
@@ -350,27 +369,319 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="abstract" class="level2">
 <h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
-<p>Add your abstract here.</p>
+<p>Walkable access to a pharmacy is a basic measure of everyday access to medicines. Using the Global Human Settlement Layer Urban Centre Database, which describes 11,422 urban centres worldwide, we explored how the share of a city’s population living within 1 km of a pharmacy relates to city population and World Bank income group. We first found that pharmacy data is far from complete: it is available for most urban centres in high-income countries but for only 4% of those in low-income countries, and availability rises sharply with city size. Among the 2,465 urban centres with data, larger cities had a <em>smaller</em> share of residents near a pharmacy in every income group. This negative relationship was steepest in low- and lower-middle-income countries and weakest in high-income countries, and the same pattern appeared more weakly for hospitals. Because data availability itself depends on income and size, these results describe mapped pharmacies and should not be read as definitive measures of access.</p>
 </section>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Add introduction section here.</p>
+<p>Pharmacies are often the most frequent point of contact people have with the health system. They supply medicines and, in many countries, basic advice and care. How far people live from a pharmacy is one simple, comparable measure of everyday access to medicines. Research on global access to health care has shown that travel time to facilities varies widely across and within countries <span class="citation" data-cites="weiss2020">(<a href="#ref-weiss2020" role="doc-biblioref"><span class="nocase">Weiss et al.</span> 2020</a>)</span>. However, much of this work focuses on rural areas, and less attention is paid to differences <em>between</em> cities. Cities around the world range from 50,000 to more than 40 million people. It is not obvious whether a very large city offers better walkable access, because it has more facilities, or worse access, because its population is spread over a much larger area.</p>
+<p>Our research question is:</p>
+<blockquote class="blockquote">
+<p><strong>How does the share of an urban centre’s population living within 1 km of a pharmacy relate to the centre’s population size, and does this relationship differ across World Bank income groups?</strong></p>
+</blockquote>
+<p>We expected urban centres in higher-income countries to have better pharmacy access, and larger centres to have lower access, with a stronger size effect in lower-income countries.</p>
+<p>We use the Health theme of the GHS Urban Centre Database <span class="citation" data-cites="mari2026">(<a href="#ref-mari2026" role="doc-biblioref">Mari Rivero et al. 2026</a>)</span>, as distributed through the TidyTuesday project <span class="citation" data-cites="tidytuesday2026health">(<a href="#ref-tidytuesday2026health" role="doc-biblioref">Data Science Learning Community 2026</a>)</span>.</p>
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
-<p>Add data section here.</p>
+<section id="data-source-and-collection" class="level3">
+<h3 class="anchored" data-anchor-id="data-source-and-collection">Data source and collection</h3>
+<p>The Global Human Settlement Layer Urban Centre Database (GHS-UCDB) is produced by the European Commission’s Joint Research Centre <span class="citation" data-cites="mari2026">(<a href="#ref-mari2026" role="doc-biblioref">Mari Rivero et al. 2026</a>)</span>. Urban centres are defined from satellite-derived population and built-up area grids using the Degree of Urbanisation method: a cluster of contiguous, densely populated grid cells with at least 50,000 inhabitants is an urban centre. This gives a consistent definition of a “city” across countries, independent of administrative boundaries. The JRC combined these boundaries with open-source geospatial data on hospital and pharmacy locations (from 2024) and computed the modeled share of each centre’s 2025 population living within 1 km of a facility. The TidyTuesday curators downloaded the Health theme file and recoded the source’s <code>"-"</code> entries as missing values.</p>
+<p>Each observation is an urban centre. The dataset contains 11,422 urban centres and 17 variables.</p>
+</section>
+<section id="variables" class="level3">
+<h3 class="anchored" data-anchor-id="variables">Variables</h3>
+<p>The variables we use are:</p>
+<ul>
+<li><strong>Pharmacy share</strong> (<code>HL_SHP_PHA_2025</code>): percentage of the urban centre’s population living within 1 km of a pharmacy (0-100).</li>
+<li><strong>Hospital share</strong> (<code>HL_SHP_HOS_2025</code>): percentage of the population living within 1 km of a hospital (0-100), used for comparison.</li>
+<li><strong>Population</strong> (<code>GC_POP_TOT_2025</code>): total population of the urban centre in 2025.</li>
+<li><strong>Income group</strong> (<code>GC_DEV_WIG_2025</code>): World Bank income group of the country the centre is in (low, lower middle, upper middle, high).</li>
+<li><strong>Size class</strong>: a variable we created by binning population into 50K-100K, 100K-500K, 500K-1M, and 1M+ people.</li>
+</ul>
+</section>
+<section id="data-cleaning" class="level3">
+<h3 class="anchored" data-anchor-id="data-cleaning">Data cleaning</h3>
+<p>We renamed the variables we use to shorter, readable names and dropped the remaining columns. We removed 9 urban centres with a missing income group, since income group is central to our question. We ordered income group from lowest to highest, and created the size class variable to compare groups of similarly sized cities. Because city populations are highly right-skewed (the median is about 100,000 people, but the largest centre, Guangzhou, has about 43 million), we display population on a log scale.</p>
+<p>The most important cleaning decision concerned missing values. The pharmacy share is missing for 8,948 of the 11,413 urban centres (78%). The source does not tell us whether a missing value means that no pharmacy was mapped in the city or that the data was not collected, so we cannot treat missing as zero. We therefore analyze the share only for the 2,465 centres with data, but we first examine <em>which</em> centres have data.</p>
+</section>
+<section id="exploratory-data-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory data analysis</h3>
+<p><a href="#fig-univariate" class="quarto-xref">Figure&nbsp;1</a> shows the distributions of the two numerical variables in our research question. Population (<a href="#fig-univariate-1" class="quarto-xref">Figure&nbsp;1 (a)</a>) is strongly right-skewed even on a log scale: most urban centres are just above the 50,000-person threshold, and only a few have more than 10 million people. Among centres with pharmacy data, the pharmacy share (<a href="#fig-univariate-2" class="quarto-xref">Figure&nbsp;1 (b)</a>) ranges from nearly 0% to 99%, with a median of 19.1%. It is also right-skewed: in most cities, fewer than a third of residents live within 1 km of a mapped pharmacy.</p>
+<div id="fig-univariate" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-univariate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-univariate" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-univariate-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-univariate-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-univariate-1.png" class="img-fluid figure-img" data-ref-parent="fig-univariate" width="384">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-univariate-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Population of all urban centres (log scale).
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-univariate" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-univariate-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-univariate-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-univariate-2.png" class="img-fluid figure-img" data-ref-parent="fig-univariate" width="384">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-univariate-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Pharmacy share, for centres with pharmacy data.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-univariate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Distributions of urban centre population and pharmacy share.
+</figcaption>
+</figure>
+</div>
+<p><a href="#tbl-counts" class="quarto-xref">Table&nbsp;1</a> shows how many urban centres fall into each income group and size class. Most urban centres in the dataset are in lower-middle- and upper-middle-income countries, and most have fewer than 500,000 people.</p>
+<div class="cell">
+<div id="tbl-counts" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-counts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Number of urban centres by income group and size class.
+</figcaption>
+<div aria-describedby="tbl-counts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Income group</th>
+<th style="text-align: right;">50K-100K</th>
+<th style="text-align: right;">100K-500K</th>
+<th style="text-align: right;">500K-1M</th>
+<th style="text-align: right;">1M+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Low income</td>
+<td style="text-align: right;">537</td>
+<td style="text-align: right;">445</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lower middle</td>
+<td style="text-align: right;">2243</td>
+<td style="text-align: right;">1949</td>
+<td style="text-align: right;">213</td>
+<td style="text-align: right;">186</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Upper middle</td>
+<td style="text-align: right;">1945</td>
+<td style="text-align: right;">1775</td>
+<td style="text-align: right;">258</td>
+<td style="text-align: right;">201</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">High income</td>
+<td style="text-align: right;">748</td>
+<td style="text-align: right;">657</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">102</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><a href="#fig-coverage" class="quarto-xref">Figure&nbsp;2</a> shows that whether a centre has pharmacy data depends strongly on <em>both</em> income group and size. Almost every high-income city with more than one million people has data, while only about 1% of the smallest low-income centres do. Within every income group, larger cities are more likely to have data. In total, only 47 low-income urban centres have pharmacy data. This means that the cities we analyze are not a representative sample of the world’s urban centres: they over-represent large, wealthy cities.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-coverage" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-coverage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-coverage-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-coverage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Pharmacy data is available for most cities in high-income countries, but only for the largest cities in lower-income countries.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>Add results section here.</p>
+<p><a href="#fig-scatter" class="quarto-xref">Figure&nbsp;3</a> shows the main relationship of interest: pharmacy share against population (on a log scale), separately for each income group. The lines summarize the overall trend in each panel.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-scatter" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-scatter-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: In every income group, larger urban centres tend to have a smaller share of residents within 1 km of a pharmacy. The decline is steepest in low-income countries.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In all four income groups, the share of residents near a pharmacy decreases as city size increases. The strength of this negative relationship differs by income group (<a href="#tbl-cor" class="quarto-xref">Table&nbsp;2</a>). The correlation between log population and pharmacy share is strongest in low-income countries (r = -0.62) and lower-middle-income countries (r = -0.44), and weakest in high-income countries (r = -0.16). The low-income estimate is based on only 47 centres, so it is much less certain than the others.</p>
+<div class="cell">
+<div id="tbl-cor" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-cor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Median pharmacy share and correlation between log population and pharmacy share, by income group (centres with pharmacy data only).
+</figcaption>
+<div aria-describedby="tbl-cor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Income group</th>
+<th style="text-align: right;">Centres</th>
+<th style="text-align: right;">Median share (%)</th>
+<th style="text-align: right;">Correlation (r)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Low income</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">10.8</td>
+<td style="text-align: right;">-0.62</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lower middle</td>
+<td style="text-align: right;">455</td>
+<td style="text-align: right;">19.9</td>
+<td style="text-align: right;">-0.44</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Upper middle</td>
+<td style="text-align: right;">899</td>
+<td style="text-align: right;">22.8</td>
+<td style="text-align: right;">-0.27</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">High income</td>
+<td style="text-align: right;">1064</td>
+<td style="text-align: right;">16.5</td>
+<td style="text-align: right;">-0.16</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Contrary to our first hypothesis, high-income centres do not have the highest pharmacy shares. Their median share (16.5%) is lower than in upper-middle- and lower-middle-income centres. <a href="#tbl-median" class="quarto-xref">Table&nbsp;3</a> helps explain this by comparing cities of similar size. Small cities (50K-100K) in lower-income countries that have data have high pharmacy shares, but the share drops quickly as size increases: in low-income countries, the median falls from about 49% in the smallest centres to about 5% in centres with more than a million people. In high-income countries, the decline is more gradual, from about 20% to 11%. So, in high-income countries, access is more similar across city sizes, while in lower-income countries the largest cities have the lowest walkable access to mapped pharmacies.</p>
+<div class="cell">
+<div id="tbl-median" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-median-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Median percentage of population within 1 km of a pharmacy, by income group and size class. The number of centres with data is in parentheses.
+</figcaption>
+<div aria-describedby="tbl-median-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Income group</th>
+<th style="text-align: left;">50K-100K</th>
+<th style="text-align: left;">100K-500K</th>
+<th style="text-align: left;">500K-1M</th>
+<th style="text-align: left;">1M+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Low income</td>
+<td style="text-align: left;">49.4 (6)</td>
+<td style="text-align: left;">15.9 (18)</td>
+<td style="text-align: left;">10.3 (6)</td>
+<td style="text-align: left;">4.9 (17)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lower middle</td>
+<td style="text-align: left;">35.2 (115)</td>
+<td style="text-align: left;">22.1 (194)</td>
+<td style="text-align: left;">11.0 (58)</td>
+<td style="text-align: left;">8.0 (88)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Upper middle</td>
+<td style="text-align: left;">30.5 (280)</td>
+<td style="text-align: left;">20.2 (415)</td>
+<td style="text-align: left;">17.1 (96)</td>
+<td style="text-align: left;">15.2 (108)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">High income</td>
+<td style="text-align: left;">19.5 (416)</td>
+<td style="text-align: left;">15.4 (476)</td>
+<td style="text-align: left;">13.9 (74)</td>
+<td style="text-align: left;">10.8 (98)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Some of the largest cities show signs that their facilities are under-mapped rather than truly absent. For example, the urban centre named Guangzhou, the largest in the data with about 43 million people, has only 2 recorded pharmacies but 665 recorded hospitals, so just 0.05% of its population lives within 1 km of a mapped pharmacy. Pharmacy data is also missing for all but 16 of China’s 1,974 urban centres. Values like this are a reminder that the data measures <em>mapped</em> pharmacies.</p>
+<p>To check whether this pattern is specific to pharmacies, we compared it with hospitals, for which data is available for many more centres. <a href="#fig-facilities" class="quarto-xref">Figure&nbsp;4</a> shows the median share by size class for both facility types. Median hospital shares are higher than pharmacy shares in every income group. In low- and lower-middle-income countries, the share near a hospital also declines with size, from about 45% in the smallest centres to about 25% in centres with 500,000 to 1 million people, before levelling off. In high-income countries, however, hospital access is similar across sizes and even rises slightly in larger cities. So, for both types of facility, larger cities in lower-income countries have lower walkable access, while high-income countries show little or no size penalty.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-facilities" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-facilities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-facilities-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-facilities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: The share of residents near a hospital also declines with city size in lower-income countries, but not in high-income countries.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="discussion" class="level2">
 <h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
-<p>Add discussion section here.</p>
+<p>We set out to explore how walkable pharmacy access relates to city size and income group. Among urban centres with pharmacy data, larger cities consistently had a smaller share of residents living within 1 km of a pharmacy, and this negative relationship was much stronger in low- and lower-middle-income countries (r around -0.6 and -0.4) than in high-income countries (r around -0.2). This partly supports our second hypothesis. Our first hypothesis was not supported: high-income centres did not have the highest median pharmacy share. Instead, high-income countries stood out for having <em>more uniform</em> access across city sizes. A possible explanation is that the largest cities in lower-income countries grew quickly and spread over large areas, so that services did not keep pace with their growth, while cities in high-income countries have older, more evenly distributed retail networks. Our data cannot test this explanation.</p>
+<p>The most important limitation is missing data. Pharmacy data is missing for most urban centres, and whether it is missing depends strongly on both income group and size (<a href="#fig-coverage" class="quarto-xref">Figure&nbsp;2</a>), the same variables in our research question. Crowd-sourced and open geographic data are known to be less complete in some parts of the world <span class="citation" data-cites="barrington2017">(<a href="#ref-barrington2017" role="doc-biblioref">Barrington-Leigh and Millard-Ball 2017</a>)</span>, and implausibly low values for very large cities, such as Guangzhou, suggest under-mapping. This threatens the validity of our results in two ways. First, the 47 low-income centres with data are mostly the largest cities, so the low-income results may not describe typical low-income cities. Second, if pharmacies in large cities are less completely mapped than those in small cities, part of the negative size relationship may reflect data completeness rather than real access. In addition, the share within 1 km is a modeled estimate based on gridded population data, the facility counts (2024) and population estimates (2025) come from different years, and income group is measured at the country level, which hides large differences between and within cities in the same country. Finally, our results describe associations only and do not show that city size or income causes differences in access.</p>
+<p>To improve this analysis, we would compare pharmacy coverage with an independent count of pharmacies from national registries for a few countries, to estimate how much is missing. We could also look within individual large countries with many centres in the data (such as the United States, Brazil, and India) to see whether the size pattern holds when income group is held constant at the country level.</p>
 </section>
 <section id="reflection" class="level2">
 <h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
-<p>Add reflection section here. Write this after the presentation.</p>
+<p>The biggest lesson of this project was that the first question to ask about a variable is not “what does it show?” but “who is missing from it?” Our first scatterplot of pharmacy share against population looked clean and convincing, and we had started drafting conclusions about access in low-income countries before Abby counted the non-missing values by income group and found that only 47 of more than 1,000 low-income urban centres had pharmacy data. That discovery reshaped the project. We moved the missing data analysis to the start of the Data section, rewrote our hypotheses as statements about <em>mapped</em> pharmacies, and spent more time on limitations than we had planned. Spotting Guangzhou’s near-zero pharmacy share reinforced the same lesson: one implausible value told us more about data quality than any summary statistic.</p>
+<p>Presenting and listening to other teams also changed our report. During our presentation, a classmate asked whether high-income cities have <em>worse</em> access, since their median share was lower than for middle-income cities. We did not have a good answer in the moment, and this question led us to build <a href="#tbl-median" class="quarto-xref">Table&nbsp;3</a>, which compares cities of similar size and shows that the difference is mostly about how access changes with size. Watching other teams, we noticed that the clearest presentations showed one main plot per slide with a title that stated the takeaway, which is why we rewrote our figure captions as findings rather than descriptions.</p>
+<p>Our collaboration worked best when we followed our team contract and divided work by section, with each person owning one or two code cells and the narrative that goes with them. Holtzmann set up a shared ggplot theme early, which kept our figures consistent without anyone having to coordinate colors later. Our main challenge was merge conflicts in <code>index.qmd</code> during the week before the write-up was due, when two of us edited the cleaning code at the same time and one of us renamed a variable that the other’s plot depended on. We resolved it on a call, and afterward we agreed to always pull before starting work, to commit small changes often with informative messages, and to post in our group chat before changing shared code such as the <code>clean-data</code> cell. We also learned to re-render the whole project before pushing, after a broken inline code reference made the website fail to build on GitHub.</p>
+<p>If we did this project again, we would check missingness and data coverage for every key variable during the proposal stage, before committing to a research question. We would also schedule a mid-project meeting to read the full report together, since several of our transitions between sections were written by different people and only came together at the end. Finally, we would decide on variable names and object names as a team at the start, which would have prevented most of our merge conflicts.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-barrington2017" class="csl-entry" role="listitem">
+Barrington-Leigh, Christopher, and Adam Millard-Ball. 2017. <span>“The World’s User-Generated Road Map Is More Than 80% Complete.”</span> <em>PLOS ONE</em> 12 (8): e0180698. <a href="https://doi.org/10.1371/journal.pone.0180698">https://doi.org/10.1371/journal.pone.0180698</a>.
+</div>
+<div id="ref-tidytuesday2026health" class="csl-entry" role="listitem">
+Data Science Learning Community. 2026. <em>Health Metrics in Urban Centres Worldwide</em>. TidyTuesday, week of September 29, 2026. <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-09-29/readme.md">https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-09-29/readme.md</a>.
+</div>
+<div id="ref-mari2026" class="csl-entry" role="listitem">
+Mari Rivero, Ines, Michele Melchiorri, Pietro Florio, et al. 2026. <span>“<span>GHS-UCDB R2024A</span> – <span>GHS</span> Urban Centre Database 2025.”</span> Dataset. European Commission, Joint Research Centre. <a href="https://doi.org/10.2905/1a338be6-7eaf-480c-9664-3a8ade88cbcd">https://doi.org/10.2905/1a338be6-7eaf-480c-9664-3a8ade88cbcd</a>.
+</div>
+<div id="ref-weiss2020" class="csl-entry" role="listitem">
+<span class="nocase">Weiss, Daniel J., Andy Nelson, Carlos A. Vargas-Ruiz, et al.</span> 2020. <span>“Global Maps of Travel Time to Healthcare Facilities.”</span> <em>Nature Medicine</em> 26 (12): 1835–38. <a href="https://doi.org/10.1038/s41591-020-1059-1">https://doi.org/10.1038/s41591-020-1059-1</a>.
+</div>
+</div>
 
 
 </section>
