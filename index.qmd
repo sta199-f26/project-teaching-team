@@ -1,31 +1,399 @@
 ---
-title: Add project title here
-subtitle: Report
+title: Bigger city, farther pharmacy?
+subtitle: Report on walkable pharmacy access in urban centres worldwide
 execute:
-  echo: true
+  echo: false
+  warning: false
+  message: false
+bibliography: references.bib
 ---
+
+```{r}
+#| label: load-packages
+library(tidyverse)
+library(scales)
+library(knitr)
+```
+
+```{r}
+#| label: load-data
+health_raw <- read_csv("data/health.csv")
+```
+
+```{r}
+#| label: clean-data
+income_levels <- c("Low income", "Lower middle", "Upper middle", "High income")
+
+health <- health_raw |>
+  select(
+    name = GC_UCN_MAI_2025,
+    country = GC_CNT_GAD_2025,
+    area_km2 = GC_UCA_KM2_2025,
+    population = GC_POP_TOT_2025,
+    income = GC_DEV_WIG_2025,
+    region = GC_DEV_USR_2025,
+    pharmacy_share = HL_SHP_PHA_2025,
+    hospital_share = HL_SHP_HOS_2025
+  ) |>
+  filter(!is.na(income)) |>
+  mutate(
+    income = str_replace(income, "Middle", "middle"),
+    income = fct_relevel(income, income_levels),
+    size_class = cut(
+      population,
+      breaks = c(0, 1e5, 5e5, 1e6, Inf),
+      labels = c("50K-100K", "100K-500K", "500K-1M", "1M+"),
+      right = FALSE
+    ),
+    has_pharmacy_data = !is.na(pharmacy_share)
+  )
+
+pharmacy <- health |>
+  filter(has_pharmacy_data)
+```
+
+```{r}
+#| label: summary-numbers
+n_raw <- nrow(health_raw)
+n_no_income <- n_raw - nrow(health)
+n_pharmacy <- nrow(pharmacy)
+
+coverage_by_income <- health |>
+  group_by(income) |>
+  summarize(
+    n = n(),
+    n_with_data = sum(has_pharmacy_data),
+    pct_with_data = mean(has_pharmacy_data)
+  )
+
+cor_by_income <- pharmacy |>
+  group_by(income) |>
+  summarize(
+    n = n(),
+    median_share = median(pharmacy_share),
+    r = cor(log10(population), pharmacy_share)
+  )
+
+guangzhou <- health_raw |>
+  filter(GC_UCN_MAI_2025 == "Guangzhou")
+
+china <- health_raw |>
+  filter(GC_CNT_GAD_2025 == "China") |>
+  summarize(
+    n = n(),
+    n_with_pharmacy_data = sum(!is.na(HL_SHP_PHA_2025))
+  )
+```
 
 ## Abstract
 
-Add your abstract here.
+Walkable access to a pharmacy is a basic measure of everyday access to medicines.
+Using the Global Human Settlement Layer Urban Centre Database, which describes `r label_comma()(n_raw)` urban centres worldwide, we explored how the share of a city's population living within 1 km of a pharmacy relates to city population and World Bank income group.
+We first found that pharmacy data is far from complete: it is available for most urban centres in high-income countries but for only `r label_percent(accuracy = 1)(coverage_by_income$pct_with_data[1])` of those in low-income countries, and availability rises sharply with city size.
+Among the `r label_comma()(n_pharmacy)` urban centres with data, larger cities had a *smaller* share of residents near a pharmacy in every income group.
+This negative relationship was steepest in low- and lower-middle-income countries and weakest in high-income countries, and the same pattern appeared more weakly for hospitals.
+Because data availability itself depends on income and size, these results describe mapped pharmacies and should not be read as definitive measures of access.
 
 ## Introduction
 
-Add introduction section here.
+Pharmacies are often the most frequent point of contact people have with the health system.
+They supply medicines and, in many countries, basic advice and care.
+How far people live from a pharmacy is one simple, comparable measure of everyday access to medicines.
+Research on global access to health care has shown that travel time to facilities varies widely across and within countries [@weiss2020].
+However, much of this work focuses on rural areas, and less attention is paid to differences *between* cities.
+Cities around the world range from 50,000 to more than 40 million people.
+It is not obvious whether a very large city offers better walkable access, because it has more facilities, or worse access, because its population is spread over a much larger area.
+
+Our research question is:
+
+> **How does the share of an urban centre's population living within 1 km of a pharmacy relate to the centre's population size, and does this relationship differ across World Bank income groups?**
+
+We expected urban centres in higher-income countries to have better pharmacy access, and larger centres to have lower access, with a stronger size effect in lower-income countries.
+
+We use the Health theme of the GHS Urban Centre Database [@mari2026], as distributed through the TidyTuesday project [@tidytuesday2026health].
 
 ## Data
 
-Add data section here.
+### Data source and collection
+
+The Global Human Settlement Layer Urban Centre Database (GHS-UCDB) is produced by the European Commission's Joint Research Centre [@mari2026].
+Urban centres are defined from satellite-derived population and built-up area grids using the Degree of Urbanisation method: a cluster of contiguous, densely populated grid cells with at least 50,000 inhabitants is an urban centre.
+This gives a consistent definition of a "city" across countries, independent of administrative boundaries.
+The JRC combined these boundaries with open-source geospatial data on hospital and pharmacy locations (from 2024) and computed the modeled share of each centre's 2025 population living within 1 km of a facility.
+The TidyTuesday curators downloaded the Health theme file and recoded the source's `"-"` entries as missing values.
+
+Each observation is an urban centre.
+The dataset contains `r label_comma()(n_raw)` urban centres and 17 variables.
+
+### Variables
+
+The variables we use are:
+
+-   **Pharmacy share** (`HL_SHP_PHA_2025`): percentage of the urban centre's population living within 1 km of a pharmacy (0-100).
+-   **Hospital share** (`HL_SHP_HOS_2025`): percentage of the population living within 1 km of a hospital (0-100), used for comparison.
+-   **Population** (`GC_POP_TOT_2025`): total population of the urban centre in 2025.
+-   **Income group** (`GC_DEV_WIG_2025`): World Bank income group of the country the centre is in (low, lower middle, upper middle, high).
+-   **Size class**: a variable we created by binning population into 50K-100K, 100K-500K, 500K-1M, and 1M+ people.
+
+### Data cleaning
+
+We renamed the variables we use to shorter, readable names and dropped the remaining columns.
+We removed `r n_no_income` urban centres with a missing income group, since income group is central to our question.
+We ordered income group from lowest to highest, and created the size class variable to compare groups of similarly sized cities.
+Because city populations are highly right-skewed (the median is about 100,000 people, but the largest centre, Guangzhou, has about 43 million), we display population on a log scale.
+
+The most important cleaning decision concerned missing values.
+The pharmacy share is missing for `r label_comma()(sum(!health$has_pharmacy_data))` of the `r label_comma()(nrow(health))` urban centres (`r label_percent(accuracy = 1)(mean(!health$has_pharmacy_data))`).
+The source does not tell us whether a missing value means that no pharmacy was mapped in the city or that the data was not collected, so we cannot treat missing as zero.
+We therefore analyze the share only for the `r label_comma()(n_pharmacy)` centres with data, but we first examine *which* centres have data.
+
+### Exploratory data analysis
+
+@fig-univariate shows the distributions of the two numerical variables in our research question.
+Population (@fig-univariate-1) is strongly right-skewed even on a log scale: most urban centres are just above the 50,000-person threshold, and only a few have more than 10 million people.
+Among centres with pharmacy data, the pharmacy share (@fig-univariate-2) ranges from nearly 0% to `r round(max(pharmacy$pharmacy_share))`%, with a median of `r round(median(pharmacy$pharmacy_share), 1)`%.
+It is also right-skewed: in most cities, fewer than a third of residents live within 1 km of a mapped pharmacy.
+
+```{r}
+#| label: fig-univariate
+#| fig-cap: Distributions of urban centre population and pharmacy share.
+#| fig-subcap:
+#|   - Population of all urban centres (log scale).
+#|   - Pharmacy share, for centres with pharmacy data.
+#| layout-ncol: 2
+#| fig-width: 4
+#| fig-height: 3
+ggplot(health, aes(x = population)) +
+  geom_histogram(bins = 30) +
+  scale_x_log10(labels = label_number(scale_cut = cut_short_scale())) +
+  labs(
+    x = "Urban centre population (log scale)",
+    y = "Number of urban centres"
+  ) +
+  theme_minimal()
+
+ggplot(pharmacy, aes(x = pharmacy_share)) +
+  geom_histogram(binwidth = 5, boundary = 0) +
+  labs(
+    x = "Population within 1 km of a pharmacy (%)",
+    y = "Number of urban centres"
+  ) +
+  theme_minimal()
+```
+
+@tbl-counts shows how many urban centres fall into each income group and size class.
+Most urban centres in the dataset are in lower-middle- and upper-middle-income countries, and most have fewer than 500,000 people.
+
+```{r}
+#| label: tbl-counts
+#| tbl-cap: Number of urban centres by income group and size class.
+health |>
+  count(income, size_class) |>
+  pivot_wider(names_from = size_class, values_from = n) |>
+  kable(
+    col.names = c("Income group", "50K-100K", "100K-500K", "500K-1M", "1M+")
+  )
+```
+
+@fig-coverage shows that whether a centre has pharmacy data depends strongly on *both* income group and size.
+Almost every high-income city with more than one million people has data, while only about 1% of the smallest low-income centres do.
+Within every income group, larger cities are more likely to have data.
+In total, only `r coverage_by_income$n_with_data[1]` low-income urban centres have pharmacy data.
+This means that the cities we analyze are not a representative sample of the world's urban centres: they over-represent large, wealthy cities.
+
+```{r}
+#| label: fig-coverage
+#| fig-cap: Pharmacy data is available for most cities in high-income countries, but only for the largest cities in lower-income countries.
+#| fig-width: 7
+#| fig-asp: 0.5
+health |>
+  group_by(income, size_class) |>
+  summarize(pct_with_data = mean(has_pharmacy_data), .groups = "drop") |>
+  ggplot(aes(
+    x = size_class,
+    y = pct_with_data,
+    color = income,
+    group = income
+  )) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  scale_y_continuous(labels = label_percent(), limits = c(0, 1)) +
+  scale_color_viridis_d(end = 0.85, guide = guide_legend(reverse = TRUE)) +
+  labs(
+    title = "Share of urban centres with pharmacy access data",
+    x = "Urban centre population",
+    y = "Centres with data",
+    color = "Income group"
+  ) +
+  theme_minimal()
+```
 
 ## Results
 
-Add results section here.
+@fig-scatter shows the main relationship of interest: pharmacy share against population (on a log scale), separately for each income group.
+The lines summarize the overall trend in each panel.
+
+```{r}
+#| label: fig-scatter
+#| fig-cap: In every income group, larger urban centres tend to have a smaller share of residents within 1 km of a pharmacy. The decline is steepest in low-income countries.
+#| fig-width: 8
+#| fig-asp: 0.4
+ggplot(pharmacy, aes(x = population, y = pharmacy_share)) +
+  geom_point(alpha = 0.25, size = 1) +
+  geom_smooth(method = "lm", se = FALSE, color = "#D55E00") +
+  facet_wrap(~income, nrow = 1) +
+  scale_x_log10(labels = label_number(scale_cut = cut_short_scale())) +
+  coord_cartesian(ylim = c(0, 100)) +
+  labs(
+    title = "Walkable pharmacy access by city size and income group",
+    x = "Urban centre population (log scale)",
+    y = "Population within 1 km\nof a pharmacy (%)"
+  ) +
+  theme_minimal()
+```
+
+In all four income groups, the share of residents near a pharmacy decreases as city size increases.
+The strength of this negative relationship differs by income group (@tbl-cor).
+The correlation between log population and pharmacy share is strongest in low-income countries (r = `r round(cor_by_income$r[1], 2)`) and lower-middle-income countries (r = `r round(cor_by_income$r[2], 2)`), and weakest in high-income countries (r = `r round(cor_by_income$r[4], 2)`).
+The low-income estimate is based on only `r cor_by_income$n[1]` centres, so it is much less certain than the others.
+
+```{r}
+#| label: tbl-cor
+#| tbl-cap: Median pharmacy share and correlation between log population and pharmacy share, by income group (centres with pharmacy data only).
+cor_by_income |>
+  kable(
+    col.names = c(
+      "Income group",
+      "Centres",
+      "Median share (%)",
+      "Correlation (r)"
+    ),
+    digits = c(0, 0, 1, 2)
+  )
+```
+
+Contrary to our first hypothesis, high-income centres do not have the highest pharmacy shares.
+Their median share (`r round(cor_by_income$median_share[4], 1)`%) is lower than in upper-middle- and lower-middle-income centres.
+@tbl-median helps explain this by comparing cities of similar size.
+Small cities (50K-100K) in lower-income countries that have data have high pharmacy shares, but the share drops quickly as size increases: in low-income countries, the median falls from about 49% in the smallest centres to about 5% in centres with more than a million people.
+In high-income countries, the decline is more gradual, from about 20% to 11%.
+So, in high-income countries, access is more similar across city sizes, while in lower-income countries the largest cities have the lowest walkable access to mapped pharmacies.
+
+```{r}
+#| label: tbl-median
+#| tbl-cap: Median percentage of population within 1 km of a pharmacy, by income group and size class. The number of centres with data is in parentheses.
+pharmacy |>
+  group_by(income, size_class) |>
+  summarize(
+    median_share = median(pharmacy_share),
+    n = n(),
+    .groups = "drop"
+  ) |>
+  mutate(
+    cell = paste0(label_number(accuracy = 0.1)(median_share), " (", n, ")")
+  ) |>
+  select(-median_share, -n) |>
+  pivot_wider(names_from = size_class, values_from = cell) |>
+  kable(
+    col.names = c("Income group", "50K-100K", "100K-500K", "500K-1M", "1M+")
+  )
+```
+
+Some of the largest cities show signs that their facilities are under-mapped rather than truly absent.
+For example, the urban centre named Guangzhou, the largest in the data with about `r round(guangzhou$GC_POP_TOT_2025 / 1e6)` million people, has only `r guangzhou$HL_FCL_PHA_2024` recorded pharmacies but `r guangzhou$HL_FCL_HOS_2024` recorded hospitals, so just `r round(guangzhou$HL_SHP_PHA_2025, 2)`% of its population lives within 1 km of a mapped pharmacy.
+Pharmacy data is also missing for all but `r china$n_with_pharmacy_data` of China's `r label_comma()(china$n)` urban centres.
+Values like this are a reminder that the data measures *mapped* pharmacies.
+
+To check whether this pattern is specific to pharmacies, we compared it with hospitals, for which data is available for many more centres.
+@fig-facilities shows the median share by size class for both facility types.
+Median hospital shares are higher than pharmacy shares in every income group.
+In low- and lower-middle-income countries, the share near a hospital also declines with size, from about 45% in the smallest centres to about 25% in centres with 500,000 to 1 million people, before levelling off.
+In high-income countries, however, hospital access is similar across sizes and even rises slightly in larger cities.
+So, for both types of facility, larger cities in lower-income countries have lower walkable access, while high-income countries show little or no size penalty.
+
+```{r}
+#| label: fig-facilities
+#| fig-cap: The share of residents near a hospital also declines with city size in lower-income countries, but not in high-income countries.
+#| fig-width: 8
+#| fig-height: 3.75
+health |>
+  pivot_longer(
+    cols = c(pharmacy_share, hospital_share),
+    names_to = "facility",
+    values_to = "share"
+  ) |>
+  filter(!is.na(share)) |>
+  mutate(
+    facility = if_else(facility == "pharmacy_share", "Pharmacy", "Hospital")
+  ) |>
+  group_by(facility, income, size_class) |>
+  summarize(median_share = median(share), .groups = "drop") |>
+  ggplot(aes(
+    x = size_class,
+    y = median_share,
+    color = income,
+    group = income
+  )) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  facet_wrap(~facility) +
+  scale_color_viridis_d(end = 0.85) +
+  labs(
+    title = "Median walkable access to health facilities by city size",
+    x = "Urban centre population",
+    y = "Median population within\n1 km of facility (%)",
+    color = "Income group"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+```
 
 ## Discussion
 
-Add discussion section here.
+We set out to explore how walkable pharmacy access relates to city size and income group.
+Among urban centres with pharmacy data, larger cities consistently had a smaller share of residents living within 1 km of a pharmacy, and this negative relationship was much stronger in low- and lower-middle-income countries (r around -0.6 and -0.4) than in high-income countries (r around -0.2).
+This partly supports our second hypothesis.
+Our first hypothesis was not supported: high-income centres did not have the highest median pharmacy share.
+Instead, high-income countries stood out for having *more uniform* access across city sizes.
+A possible explanation is that the largest cities in lower-income countries grew quickly and spread over large areas, so that services did not keep pace with their growth, while cities in high-income countries have older, more evenly distributed retail networks.
+Our data cannot test this explanation.
+
+The most important limitation is missing data.
+Pharmacy data is missing for most urban centres, and whether it is missing depends strongly on both income group and size (@fig-coverage), the same variables in our research question.
+Crowd-sourced and open geographic data are known to be less complete in some parts of the world [@barrington2017], and implausibly low values for very large cities, such as Guangzhou, suggest under-mapping.
+This threatens the validity of our results in two ways.
+First, the `r cor_by_income$n[1]` low-income centres with data are mostly the largest cities, so the low-income results may not describe typical low-income cities.
+Second, if pharmacies in large cities are less completely mapped than those in small cities, part of the negative size relationship may reflect data completeness rather than real access.
+In addition, the share within 1 km is a modeled estimate based on gridded population data, the facility counts (2024) and population estimates (2025) come from different years, and income group is measured at the country level, which hides large differences between and within cities in the same country.
+Finally, our results describe associations only and do not show that city size or income causes differences in access.
+
+To improve this analysis, we would compare pharmacy coverage with an independent count of pharmacies from national registries for a few countries, to estimate how much is missing.
+We could also look within individual large countries with many centres in the data (such as the United States, Brazil, and India) to see whether the size pattern holds when income group is held constant at the country level.
 
 ## Reflection
 
-Add reflection section here.
-Write this after the presentation.
+The biggest lesson of this project was that the first question to ask about a variable is not "what does it show?" but "who is missing from it?"
+Our first scatterplot of pharmacy share against population looked clean and convincing, and we had started drafting conclusions about access in low-income countries before Abby counted the non-missing values by income group and found that only 47 of more than 1,000 low-income urban centres had pharmacy data.
+That discovery reshaped the project.
+We moved the missing data analysis to the start of the Data section, rewrote our hypotheses as statements about *mapped* pharmacies, and spent more time on limitations than we had planned.
+Spotting Guangzhou's near-zero pharmacy share reinforced the same lesson: one implausible value told us more about data quality than any summary statistic.
+
+Presenting and listening to other teams also changed our report.
+During our presentation, a classmate asked whether high-income cities have *worse* access, since their median share was lower than for middle-income cities.
+We did not have a good answer in the moment, and this question led us to build @tbl-median, which compares cities of similar size and shows that the difference is mostly about how access changes with size.
+Watching other teams, we noticed that the clearest presentations showed one main plot per slide with a title that stated the takeaway, which is why we rewrote our figure captions as findings rather than descriptions.
+
+Our collaboration worked best when we followed our team contract and divided work by section, with each person owning one or two code cells and the narrative that goes with them.
+Holtzmann set up a shared ggplot theme early, which kept our figures consistent without anyone having to coordinate colors later.
+Our main challenge was merge conflicts in `index.qmd` during the week before the write-up was due, when two of us edited the cleaning code at the same time and one of us renamed a variable that the other's plot depended on.
+We resolved it on a call, and afterward we agreed to always pull before starting work, to commit small changes often with informative messages, and to post in our group chat before changing shared code such as the `clean-data` cell.
+We also learned to re-render the whole project before pushing, after a broken inline code reference made the website fail to build on GitHub.
+
+If we did this project again, we would check missingness and data coverage for every key variable during the proposal stage, before committing to a research question.
+We would also schedule a mid-project meeting to read the full report together, since several of our transitions between sections were written by different people and only came together at the end.
+Finally, we would decide on variable names and object names as a team at the start, which would have prevented most of our merge conflicts.
+
+## References
+
+::: {#refs}
+:::
