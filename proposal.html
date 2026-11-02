@@ -6,13 +6,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Name of team member 1">
-<meta name="author" content="Name of team member 2">
-<meta name="author" content="Name of team member 3">
-<meta name="author" content="Name of team member 4">
-<meta name="author" content="…">
+<meta name="author" content="Erin Gilbert">
+<meta name="author" content="Abby Yates">
+<meta name="author" content="Jillian Holtzmann">
+<meta name="author" content="Patty Tolan">
 
-<title>Proposal – Team name</title>
+<title>Proposal – The Statsbusters</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -66,7 +65,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -291,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Team name</span>
+    <span class="navbar-title">The Statsbusters</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -331,7 +349,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/sta199-f26/"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/sta199-f26/project-teaching-team"> <i class="bi bi-github" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -342,6 +360,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <div id="quarto-announcement" data-announcement-id="6d66d3751628335a78d75c19cdf3b476" class="alert alert-warning hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p><strong>Disclaimer:</strong> This is a sample project created by the <a href="https://sta199-f26.github.io/">STA 199</a> teaching team for illustration purposes. The team members are fictional characters, and this is not a student submission.</p>
+</div></div>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
@@ -364,11 +385,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Authors</div>
     <div class="quarto-title-meta-contents">
-             <p>Name of team member 1 </p>
-             <p>Name of team member 2 </p>
-             <p>Name of team member 3 </p>
-             <p>Name of team member 4 </p>
-             <p>… </p>
+             <p>Erin Gilbert </p>
+             <p>Abby Yates </p>
+             <p>Jillian Holtzmann </p>
+             <p>Patty Tolan </p>
           </div>
   </div>
     
@@ -386,64 +406,144 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="summary-of-discussion-about-data-interests" class="level1">
 <h1>Summary of discussion about data interests</h1>
-<p>1-4 sentence summary of your discussion during Project Milestone 1 about your data interests.</p>
+<p>Our team shares an interest in how resources are distributed unequally across places and people, especially in health and education. We looked for datasets that compare many units (cities or college majors) across both categorical groupings, such as income level or field of study, and numerical outcomes, such as access to services or earnings. We settled on one global dataset about health facilities in cities and one U.S. dataset about college majors, salaries, and exposure to artificial intelligence (AI).</p>
 </section>
-<section id="data-1" class="level1">
-<h1>Data 1</h1>
+<section id="data-1-health-metrics-in-urban-centres-worldwide" class="level1">
+<h1>Data 1: Health metrics in urban centres worldwide</h1>
 <section id="introduction-of-data" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-of-data">Introduction of data</h2>
 <ul>
-<li><p>Identify the source of the data.</p></li>
-<li><p>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</p></li>
-<li><p>Address ethical concerns about the data. If none are identified, state that explicitly.</p></li>
+<li><p><strong>Source:</strong> The data comes from the Health theme of the Global Human Settlement Layer Urban Centre Database (GHS-UCDB, release R2024A), produced by the European Commission’s Joint Research Centre (JRC) <span class="citation" data-cites="mari2026">(<a href="#ref-mari2026" role="doc-biblioref">Mari Rivero et al. 2026</a>)</span>. We accessed it through the <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-09-29/readme.md">TidyTuesday project</a> (week of September 29, 2026), where it was curated by Gabriela Palomo-Munoz.</p></li>
+<li><p><strong>Collection:</strong> The JRC first delineated urban centres worldwide from satellite-derived population and built-up area grids, using the Degree of Urbanisation method. A cell cluster qualifies as an urban centre based on population density, total population (at least 50,000 people), and contiguity of grid cells. The JRC then combined these boundaries with open-source geospatial data on the locations of hospitals and pharmacies (counts from 2024). From these, it computed facility densities, facilities per capita, and the modeled population living within 1 km of a facility (for 2025). The TidyTuesday curators downloaded the Health theme CSV file and recoded the source’s <code>"-"</code> entries as missing values.</p></li>
+<li><p><strong>Ethical concerns:</strong> The observations are cities, not people, so there are no privacy concerns for individuals. The main ethical concern is about fairness in interpretation. Facility locations come from open geospatial sources, which are likely to be less complete in lower-income countries. If we treat missing or low values as “no access” without checking for this, we could misrepresent communities in the Global South as underserved when they are actually under-mapped, or the reverse. We also need to avoid making causal claims (e.g., that income <em>causes</em> access), since the data is observational and aggregated.</p></li>
 </ul>
 </section>
 <section id="research-question" class="level2">
 <h2 class="anchored" data-anchor-id="research-question">Research question</h2>
 <ul>
-<li><p>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</p></li>
-<li><p>A description of the research topic along with a concise statement of your hypotheses on this topic.</p></li>
-<li><p>Identify the types of variables in your research question. Categorical? Numerical?</p></li>
+<li><p><strong>Research question:</strong> How does the share of an urban centre’s population living within 1 km of a pharmacy relate to the centre’s population size, and does this relationship differ across World Bank income groups?</p></li>
+<li><p><strong>Topic and hypotheses:</strong> Pharmacies are often the first and most frequent point of contact with the health system, especially where clinics and hospitals are far away. Living within walking distance (about 1 km) of a pharmacy is a practical measure of everyday access to medicines. Cities differ enormously in size, from 50,000 to more than 40 million people, and it is not obvious whether larger cities provide better or worse walkable access. We hypothesize that (1) urban centres in higher-income countries have a larger share of their population within 1 km of a pharmacy, and (2) larger urban centres have a <em>smaller</em> share of residents near a pharmacy, because their population is spread over a larger area, with this pattern being stronger in lower-income countries where large cities grow quickly with less planning. We also expect that whether pharmacy data is available at all depends on income group and size, which we will examine before answering the main question.</p></li>
+<li><p><strong>Variable types:</strong></p>
+<ul>
+<li>Share of population within 1 km of a pharmacy (<code>HL_SHP_PHA_2025</code>): numerical (continuous, percentage)</li>
+<li>Total population (<code>GC_POP_TOT_2025</code>): numerical (continuous); we may also bin it into a categorical size class</li>
+<li>World Bank income group (<code>GC_DEV_WIG_2025</code>): categorical (ordinal, 4 levels)</li>
+</ul></li>
 </ul>
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/health.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(health)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 11,422
+Columns: 17
+$ ID_UC_G0        &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,…
+$ GC_UCN_MAI_2025 &lt;chr&gt; "Apia", "Nuku'alofa", "Ewa Beach", "Papeete", "Rosarit…
+$ GC_CNT_GAD_2025 &lt;chr&gt; "Samoa", "Tonga", "United States", "French Polynesia",…
+$ GC_UCA_KM2_2025 &lt;dbl&gt; 35, 20, 15, 50, 29, 112, 9, 19, 8, 15, 27, 13, 34, 16,…
+$ GC_POP_TOT_2025 &lt;dbl&gt; 60041.66, 51990.77, 53720.66, 109747.13, 76707.06, 250…
+$ GC_DEV_WIG_2025 &lt;chr&gt; "Lower Middle", "Upper Middle", "High income", "High i…
+$ GC_DEV_USR_2025 &lt;chr&gt; "Oceania", "Oceania", "Northern America", "Oceania", "…
+$ HL_FCL_HOS_2024 &lt;dbl&gt; NA, 2, NA, 6, 6, 6, NA, 6, 2, 4, 4, 4, 8, 2, 14, 3, 16…
+$ HL_FCL_PHA_2024 &lt;dbl&gt; NA, NA, 2, 10, 8, 8, NA, 2, NA, 42, 28, 19, 16, NA, NA…
+$ HL_FDE_HOS_2024 &lt;dbl&gt; NA, 0.10000000, NA, 0.12000000, 0.20689655, 0.05357143…
+$ HL_FDE_PHA_2024 &lt;dbl&gt; NA, NA, 0.13333333, 0.20000000, 0.27586207, 0.07142857…
+$ HL_FPC_HOS_2025 &lt;dbl&gt; NA, 0.000038500, NA, 0.000054700, 0.000078200, 0.00002…
+$ HL_FPC_PHA_2025 &lt;dbl&gt; NA, NA, 0.000037200, 0.000091100, 0.000104293, 0.00003…
+$ HL_POP_HOS_2025 &lt;dbl&gt; NA, 10751.559, 11160.558, 22890.400, 23776.140, 33061.…
+$ HL_POP_PHA_2025 &lt;dbl&gt; NA, NA, 16640.809, 31177.613, 22793.837, 25933.433, NA…
+$ HL_SHP_HOS_2025 &lt;dbl&gt; NA, 20.679748, 20.775169, 20.857403, 30.996026, 13.184…
+$ HL_SHP_PHA_2025 &lt;dbl&gt; NA, NA, 30.976554, 28.408592, 29.715436, 10.341943, NA…</code></pre>
 </div>
-<p>Write a brief description of the observations; what does each row/observation represent (e.g., each observation is a county in North Carolina)? State the number of observations and variables in the dataset. Then, describe the variables most relevant to your proposed analysis (include at least 6 relevant variables).</p>
+</div>
+<p>Each observation is an urban centre (a city defined by population density and size, not by administrative boundaries). The dataset has 11,422 observations and 17 variables. Variables relevant to our analysis are:</p>
+<ul>
+<li><code>GC_UCN_MAI_2025</code>: Main name of the urban centre.</li>
+<li><code>GC_POP_TOT_2025</code>: Total population of the urban centre in 2025.</li>
+<li><code>GC_UCA_KM2_2025</code>: Area of the urban centre in square kilometers.</li>
+<li><code>GC_DEV_WIG_2025</code>: World Bank income group of the country (Low income, Lower Middle, Upper Middle, High income).</li>
+<li><code>GC_DEV_USR_2025</code>: UN Sustainable Development Goal (SDG) region (e.g., Europe, Sub-Saharan Africa).</li>
+<li><code>HL_FCL_PHA_2024</code>: Number of pharmacies in the urban centre in 2024.</li>
+<li><code>HL_FPC_PHA_2025</code>: Pharmacies per capita in 2025.</li>
+<li><code>HL_SHP_PHA_2025</code>: Percentage of the urban centre’s population living within 1 km of a pharmacy in 2025.</li>
+<li><code>HL_SHP_HOS_2025</code>: Percentage of the urban centre’s population living within 1 km of a hospital in 2025.</li>
+</ul>
 </section>
 </section>
-<section id="data-2" class="level1">
-<h1>Data 2</h1>
+<section id="data-2-which-college-majors-are-safest-from-ai" class="level1">
+<h1>Data 2: Which college majors are safest from AI?</h1>
 <section id="introduction-of-data-1" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-of-data-1">Introduction of data</h2>
 <ul>
-<li><p>Identify the source of the data.</p></li>
-<li><p>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</p></li>
-<li><p>Address ethical concerns about the data. If none are identified, state that explicitly.</p></li>
+<li><p><strong>Source:</strong> The data was compiled for the <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-10-20/readme.md">TidyTuesday project</a> (week of October 20, 2026) by Tony Galvan. It combines the U.S. Department of Education’s <a href="https://collegescorecard.ed.gov/data/">College Scorecard</a> field-of-study data, the AI Occupational Exposure (AIOE) index of Felten, Raj, and Seamans <span class="citation" data-cites="felten2021">(<a href="#ref-felten2021" role="doc-biblioref">2021</a>)</span>, and the NCES/BLS crosswalk between college majors (CIP codes) and occupations (SOC codes).</p></li>
+<li><p><strong>Collection:</strong> The College Scorecard reports earnings of federally aided graduates by institution and field of study, based on federal tax records. The curator kept bachelor’s degrees only and took the median across institutions of median earnings one and four years after graduation. The AIOE index measures how much the abilities used in each occupation overlap with applications where AI has made progress. Each major was linked to its related occupations through the crosswalk, and the occupation-level AIOE scores were averaged for each major. Only majors with both salary data and an exposure score were kept.</p></li>
+<li><p><strong>Ethical concerns:</strong> The data is aggregated to majors, so it contains no information about individual students. However, the salary data only covers graduates who received federal financial aid, which may not represent all graduates. “AI exposure” measures overlap with AI capabilities, not job loss, so presenting high-exposure majors as “unsafe” could mislead students making real decisions about their education. We will be careful to describe exposure as overlap, not risk.</p></li>
 </ul>
 </section>
 <section id="research-question-1" class="level2">
 <h2 class="anchored" data-anchor-id="research-question-1">Research question</h2>
 <ul>
-<li><p>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</p></li>
-<li><p>A description of the research topic along with a concise statement of your hypotheses on this topic.</p></li>
-<li><p>Identify the types of variables in your research question. Categorical? Numerical?</p></li>
+<li><p><strong>Research question:</strong> How is a major’s AI exposure related to its median starting salary, and does this relationship differ across broad fields of study (e.g., Engineering, Business, Health Professions, Education)?</p></li>
+<li><p><strong>Topic and hypotheses:</strong> Many students worry about whether their major will still lead to a good job as AI tools improve. One common argument is that AI mostly affects higher-paying “knowledge work,” which would mean a positive relationship between exposure and salary. We hypothesize that, overall, AI exposure and starting salary are only weakly related, but that within broad fields the relationship differs. For example, we expect higher exposure to be associated with higher salaries within Engineering and Business, but not within Education or the Arts.</p></li>
+<li><p><strong>Variable types:</strong></p>
+<ul>
+<li>AI exposure (<code>ai_exposure</code>): numerical (continuous, standardized score)</li>
+<li>Median starting salary (<code>median_starting_salary</code>): numerical (continuous, USD)</li>
+<li>Broad field of study (<code>broad_field_short</code>): categorical (we would lump smaller fields into an “Other” category)</li>
+</ul></li>
 </ul>
 </section>
-<section id="data-3" class="level2">
-<h2 class="anchored" data-anchor-id="data-3">Data</h2>
+<section id="data-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-1">Data</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ai_majors <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/ai_salary_majors.csv"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ai_majors)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 285
+Columns: 13
+$ cip4                   &lt;chr&gt; "4604", "5003", "4807", "4703", "4903", "4701",…
+$ field_of_study         &lt;chr&gt; "Building/Construction Finishing, Management, a…
+$ broad_field            &lt;chr&gt; "Construction Trades", "Visual and Performing A…
+$ broad_field_short      &lt;chr&gt; "Construction Trades", "Visual &amp; Performing Art…
+$ median_starting_salary &lt;dbl&gt; 72864, 21878, 19151, 65331, 84187, 25583, 67372…
+$ median_salary_4yr      &lt;dbl&gt; 90691, 39716, 37055, 83528, 117176, NA, 82019, …
+$ ai_exposure            &lt;dbl&gt; -1.201, -1.162, -1.101, -1.091, -0.736, -0.684,…
+$ ai_exposure_percentile &lt;dbl&gt; 0.0, 0.4, 0.7, 1.1, 1.4, 1.8, 2.1, 2.5, 2.8, 3.…
+$ ai_exposure_language   &lt;dbl&gt; -1.133, -0.557, -1.174, -1.129, -0.905, -0.783,…
+$ ai_exposure_image      &lt;dbl&gt; -0.984, -1.796, -0.750, -0.746, -0.139, -0.245,…
+$ n_occupations          &lt;dbl&gt; 21, 3, 6, 9, 4, 12, 18, 3, 1, 6, 1, 6, 1, 2, 12…
+$ n_institutions         &lt;dbl&gt; 4, 62, 1, 1, 7, 1, 4, 49, 3, 10, 6, 548, 10, 6,…
+$ n_graduates            &lt;dbl&gt; 206, 1798, 24, 25, 632, 20, 187, 3905, 155, 312…</code></pre>
 </div>
-<p>Write a brief description of the observations; what does each row/observation represent (e.g., each observation is a county in North Carolina)? State the number of observations and variables in the dataset. Then, describe the variables most relevant to your proposed analysis (include at least 6 relevant variables).</p>
+</div>
+<p>Each observation is a college major (a four-digit CIP field of study) for bachelor’s degrees in the U.S. The dataset has 285 observations and 13 variables. Variables relevant to our analysis are:</p>
+<ul>
+<li><code>field_of_study</code>: Name of the major.</li>
+<li><code>broad_field_short</code>: Short label for the broad family of majors (e.g., Engineering, Business).</li>
+<li><code>median_starting_salary</code>: Median earnings in U.S. dollars one year after graduation.</li>
+<li><code>median_salary_4yr</code>: Median earnings in U.S. dollars four years after graduation.</li>
+<li><code>ai_exposure</code>: Average AI occupational exposure score across occupations linked to the major, standardized to have mean 0 and standard deviation 1.</li>
+<li><code>ai_exposure_language</code>: Exposure score based on language-modeling (text) AI applications.</li>
+<li><code>ai_exposure_image</code>: Exposure score based on image-generation AI applications.</li>
+<li><code>n_graduates</code>: Number of graduates with measured one-year earnings.</li>
+<li><code>n_occupations</code>: Number of occupations the major is linked to.</li>
+</ul>
+
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-felten2021" class="csl-entry" role="listitem">
+Felten, Edward, Manav Raj, and Robert Seamans. 2021. <span>“Occupational, Industry, and Geographic Exposure to Artificial Intelligence: A Novel Dataset and Its Potential Uses.”</span> <em>Strategic Management Journal</em> 42 (12): 2195–217. <a href="https://doi.org/10.1002/smj.3286">https://doi.org/10.1002/smj.3286</a>.
+</div>
+<div id="ref-mari2026" class="csl-entry" role="listitem">
+Mari Rivero, Ines, Michele Melchiorri, Pietro Florio, et al. 2026. <span>“<span>GHS-UCDB R2024A</span> – <span>GHS</span> Urban Centre Database 2025.”</span> Dataset. European Commission, Joint Research Centre. <a href="https://doi.org/10.2905/1a338be6-7eaf-480c-9664-3a8ade88cbcd">https://doi.org/10.2905/1a338be6-7eaf-480c-9664-3a8ade88cbcd</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
