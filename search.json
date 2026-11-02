@@ -1,0 +1,142 @@
+[
+  {
+    "objectID": "proposal.html",
+    "href": "proposal.html",
+    "title": "Proposal",
+    "section": "",
+    "text": "library(tidyverse)"
+  },
+  {
+    "objectID": "proposal.html#introduction-of-data",
+    "href": "proposal.html#introduction-of-data",
+    "title": "Proposal",
+    "section": "Introduction of data",
+    "text": "Introduction of data\n\nIdentify the source of the data.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nAddress ethical concerns about the data. If none are identified, state that explicitly."
+  },
+  {
+    "objectID": "proposal.html#research-question",
+    "href": "proposal.html#research-question",
+    "title": "Proposal",
+    "section": "Research question",
+    "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nIdentify the types of variables in your research question. Categorical? Numerical?"
+  },
+  {
+    "objectID": "proposal.html#data",
+    "href": "proposal.html#data",
+    "title": "Proposal",
+    "section": "Data",
+    "text": "Data\n\n# add code here\n\nWrite a brief description of the observations; what does each row/observation represent (e.g., each observation is a county in North Carolina)? State the number of observations and variables in the dataset. Then, describe the variables most relevant to your proposed analysis (include at least 6 relevant variables)."
+  },
+  {
+    "objectID": "proposal.html#introduction-of-data-1",
+    "href": "proposal.html#introduction-of-data-1",
+    "title": "Proposal",
+    "section": "Introduction of data",
+    "text": "Introduction of data\n\nIdentify the source of the data.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nAddress ethical concerns about the data. If none are identified, state that explicitly."
+  },
+  {
+    "objectID": "proposal.html#research-question-1",
+    "href": "proposal.html#research-question-1",
+    "title": "Proposal",
+    "section": "Research question",
+    "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nIdentify the types of variables in your research question. Categorical? Numerical?"
+  },
+  {
+    "objectID": "proposal.html#data-3",
+    "href": "proposal.html#data-3",
+    "title": "Proposal",
+    "section": "Data",
+    "text": "Data\n\n# add code here\n\nWrite a brief description of the observations; what does each row/observation represent (e.g., each observation is a county in North Carolina)? State the number of observations and variables in the dataset. Then, describe the variables most relevant to your proposed analysis (include at least 6 relevant variables)."
+  },
+  {
+    "objectID": "contract.html",
+    "href": "contract.html",
+    "title": "Team contract",
+    "section": "",
+    "text": "Teams work better when members have a common understanding of the team’s goals and expectations for collaboration. The purpose of this activity is to help your team making a plan for working together during lab and outside of the scheduled lab time. Each team member will have some ideas about how a team should operate. These ideas may be very different. This is your opportunity to share your thoughts and ideas to promote optimal team function and prevent misunderstandings in the future."
+  },
+  {
+    "objectID": "contract.html#meetings",
+    "href": "contract.html#meetings",
+    "title": "Team contract",
+    "section": "Meetings",
+    "text": "Meetings\n\nMeeting times: Identify a 1 - 2 hour weekly block outside of lab where the team can meet to work on assignments. All team members should block off this time on their calendar in case the team needs to meet to work on the project. Note: If you are unable to find a weekly time when the team can meet, briefly outline a plan to work on assignments outside of lab.\n\nDiscuss as a team and add your response here.\n\nMeeting location: Identify how or where the team will meet to work together (e.g. in-person, Zoom, Facetime, Google Hangouts). Be sure every member is able to access the in-person and/or virtual meeting space.\n\nDiscuss as a team and add your response here."
+  },
+  {
+    "objectID": "contract.html#communication",
+    "href": "contract.html#communication",
+    "title": "Team contract",
+    "section": "Communication",
+    "text": "Communication\n\nMethod of communication: Identify the team’s primary method of communication outside of meetings (e.g. GroupMe, Slack, text messages, etc.). Be sure all members are able to access the team’s chosen communication platform.\n\nDiscuss as a team and add your response here.\n\nNotifying team members: How should someone notify the other members if they are unable to attend lab or a scheduled team meeting?\n\nDiscuss as a team and add your response here."
+  },
+  {
+    "objectID": "contract.html#workflow",
+    "href": "contract.html#workflow",
+    "title": "Team contract",
+    "section": "Workflow",
+    "text": "Workflow\nWhile it’s not productive to divvy up the entire project work at the beginning and bring all the pieces together at the end, there will be times throughout the semester you might decide to divvy up smaller portions of the work among the team members.\n\nBy when should everyone have their portion of the work completed? Keep in mind your team will want to have time to review each portion before turning it in to make sure all pieces make sense together and any writing is cohesive.\n\nDiscuss as a team and add your response here.\n\nHow should team members communicate if they’re struggling with the portion of the work assigned to them?\n\nDiscuss as a team and add your response here."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Meet the team",
+    "section": "",
+    "text": "This project was developed by team name for STA 199: Introduction to Data Science at Duke University. The team is comprised of the following team members.\n\nTeam member 1: One-sentence description of team member 1 (e.g., year, major, etc.). Optionally, hyperlink the team name to the homepage or social profile (LinkedIn, etc.) of the team member.\nTeam member 2: One-sentence description of team member 2 (e.g., year, major, etc.). Optionally, hyperlink the team name to the homepage or social profile (LinkedIn, etc.) of the team member.\nTeam member 3: One-sentence description of team member 3 (e.g., year, major, etc.). Optionally, hyperlink the team name to the homepage or social profile (LinkedIn, etc.) of the team member.\nTeam member 4: One-sentence description of team member 4 (e.g., year, major, etc.). Optionally, hyperlink the team name to the homepage or social profile (LinkedIn, etc.) of the team member.\n…"
+  },
+  {
+    "objectID": "ai-disclosure.html",
+    "href": "ai-disclosure.html",
+    "title": "AI Disclosure",
+    "section": "",
+    "text": "We did not use generative AI for our project.\nWe used it to clarify the project guidelines.\nWe asked it to help write code.\nWe gave it our code and asked it to help fix it.\nWe asked it about an error or unexpected code behavior.\nWe used it to get feedback on our project.\nOther:"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Add project title here",
+    "section": "",
+    "text": "Add your abstract here."
+  },
+  {
+    "objectID": "index.html#abstract",
+    "href": "index.html#abstract",
+    "title": "Add project title here",
+    "section": "",
+    "text": "Add your abstract here."
+  },
+  {
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
+    "title": "Add project title here",
+    "section": "Introduction",
+    "text": "Introduction\nAdd introduction section here."
+  },
+  {
+    "objectID": "index.html#data",
+    "href": "index.html#data",
+    "title": "Add project title here",
+    "section": "Data",
+    "text": "Data\nAdd data section here."
+  },
+  {
+    "objectID": "index.html#results",
+    "href": "index.html#results",
+    "title": "Add project title here",
+    "section": "Results",
+    "text": "Results\nAdd results section here."
+  },
+  {
+    "objectID": "index.html#discussion",
+    "href": "index.html#discussion",
+    "title": "Add project title here",
+    "section": "Discussion",
+    "text": "Discussion\nAdd discussion section here."
+  },
+  {
+    "objectID": "index.html#reflection",
+    "href": "index.html#reflection",
+    "title": "Add project title here",
+    "section": "Reflection",
+    "text": "Reflection\nAdd reflection section here. Write this after the presentation."
+  }
+]
