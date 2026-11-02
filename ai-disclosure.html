@@ -351,13 +351,27 @@ Place an X in the appropriate bracket(s) to indicate "Yes".
 <ul class="task-list">
 <li><label><input type="checkbox">We did not use generative AI for our project.</label></li>
 <li><label><input type="checkbox">We used it to clarify the project guidelines.</label></li>
-<li><label><input type="checkbox">We asked it to help write code.</label></li>
+<li><label><input type="checkbox" checked="">We asked it to help write code.</label></li>
 <li><label><input type="checkbox">We gave it our code and asked it to help fix it.</label></li>
-<li><label><input type="checkbox">We asked it about an error or unexpected code behavior.</label></li>
-<li><label><input type="checkbox">We used it to get feedback on our project.</label></li>
-<li><label><input type="checkbox">Other: <!-- List other way(s) you've used generative AI for your project --></label></li>
+<li><label><input type="checkbox" checked="">We asked it about an error or unexpected code behavior.</label></li>
+<li><label><input type="checkbox" checked="">We used it to get feedback on our project.</label></li>
+<li><label><input type="checkbox" checked="">Other: We used it to help format a citation for our dataset.</label></li>
 </ul>
-<!-- If you indicated Yes above for any generative AI usage, indicate which tool and model(s) you used, e.g., Codex extension in Positron with GPT-5.6 Sol High, claude.io web interface with Opus 5.5 Medium, etc. -->
+<hr>
+<p>We used the Codex extension in Positron with GPT-6.1 Sol Medium. Every team member who used it described their use in our group chat, and we reviewed and tested all suggestions before adding them to the project. All analysis decisions, interpretations, and writing are our own.</p>
+<p>Specifically, we used AI for the following:</p>
+<ul>
+<li><strong>Help with code syntax.</strong> We asked general questions about functions and arguments, and then adapted the answers to our own data:
+<ul>
+<li>How to bin a numerical variable into categories with <code>cut()</code>, including what the <code>right</code> argument does. We used this to create our <code>size_class</code> variable with intervals like “50K-100K” that include the lower bound.</li>
+<li>How to label a log-scaled axis with short numbers (e.g., “100K”, “1M”) instead of scientific notation. It pointed us to <code>label_number(scale_cut = cut_short_scale())</code> from the scales package.</li>
+<li>How to reverse the order of a legend so it matches the order of the lines in the plot. It suggested <code>guide_legend(reverse = TRUE)</code>, which we used in the figure showing which centres have pharmacy data.</li>
+<li>How to place two plots side by side in Quarto with separate captions. It explained the <code>layout-ncol</code> and <code>fig-subcap</code> cell options, which we used for our univariate histograms.</li>
+</ul></li>
+<li><strong>Unexpected code behavior.</strong> In our scatterplot of pharmacy share against population, the trend lines went below 0% in two panels. We asked why and learned that a straight trend line extends beyond the range of the data, even when a negative percentage is impossible. We then asked how to limit the y-axis to 0-100% and learned that <code>ylim()</code> removes data outside the limits before the lines are calculated, while <code>coord_cartesian()</code> only zooms in on the plot. We chose <code>coord_cartesian(ylim = c(0, 100))</code> so that the trend lines are still based on all of the data. We also noticed that the scales package documentation marks <code>comma()</code> as superseded, and asked what to use instead. We learned that <code>comma()</code>, <code>percent()</code>, and <code>number()</code> have been replaced by <code>label_comma()</code>, <code>label_percent()</code>, and <code>label_number()</code>, so we updated our inline code.</li>
+<li><strong>Feedback.</strong> We asked the course’s AI teaching assistant to check our proposal and the Data section of our report against the milestone guidelines. It pointed out that we had not addressed ethical concerns for our second dataset and that we had not stated how many observations were missing pharmacy data. We revised both ourselves.</li>
+<li><strong>Citation.</strong> We asked how to write a BibTeX entry for a dataset with many authors. We took the author list, year, and DOI from the data provider’s recommended citation on the <a href="https://data.jrc.ec.europa.eu/dataset/1a338be6-7eaf-480c-9664-3a8ade88cbcd">JRC Data Catalogue</a>, not from the AI.</li>
+</ul>
 
 
 
