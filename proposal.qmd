@@ -1,0 +1,67 @@
+---
+title: Proposal
+---
+
+```{r}
+#| label: load-pkgs
+#| message: false
+library(tidyverse)
+```
+
+# Summary of discussion about data interests
+
+1-4 sentence summary of your discussion during Project Milestone 1 about your data interests.
+
+# Data 1
+
+## Introduction of data
+
+-   Identify the source of the data.
+
+-   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
+
+-   Address ethical concerns about the data. If none are identified, state that explicitly.
+
+## Research question
+
+-   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
+
+-   A description of the research topic along with a concise statement of your hypotheses on this topic.
+
+-   Identify the types of variables in your research question. Categorical? Numerical?
+
+## Data
+
+```{r}
+#| label: glimpse-data-1
+# add code here
+```
+
+Write a brief description of the observations; what does each row/observation represent (e.g., each observation is a county in North Carolina)? State the number of observations and variables in the dataset. Then, describe the variables most relevant to your proposed analysis (include at least 6 relevant variables).
+
+# Data 2
+
+## Introduction of data
+
+-   Identify the source of the data.
+
+-   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
+
+-   Address ethical concerns about the data. If none are identified, state that explicitly.
+
+## Research question
+
+-   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
+
+-   A description of the research topic along with a concise statement of your hypotheses on this topic.
+
+-   Identify the types of variables in your research question. Categorical? Numerical?
+
+## Data
+
+```{r}
+#| label: glimpse-data-2
+# add code here
+```
+
+Write a brief description of the observations; what does each row/observation represent (e.g., each observation is a county in North Carolina)? State the number of observations and variables in the dataset. Then, describe the variables most relevant to your proposed analysis (include at least 6 relevant variables).

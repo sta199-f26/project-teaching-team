@@ -1,0 +1,31 @@
+---
+title: Add project title here
+subtitle: Report
+execute:
+  echo: true
+---
+
+## Abstract
+
+Add your abstract here.
+
+## Introduction
+
+Add introduction section here.
+
+## Data
+
+Add data section here.
+
+## Results
+
+Add results section here.
+
+## Discussion
+
+Add discussion section here.
+
+## Reflection
+
+Add reflection section here.
+Write this after the presentation.

@@ -1,0 +1,19 @@
+---
+title: AI Disclosure
+---
+
+<!--
+
+Place an X in the appropriate bracket(s) to indicate "Yes".
+
+-->
+
+- [ ] We did not use generative AI for our project.
+- [ ] We used it to clarify the project guidelines.
+- [ ] We asked it to help write code.
+- [ ] We gave it our code and asked it to help fix it.
+- [ ] We asked it about an error or unexpected code behavior.
+- [ ] We used it to get feedback on our project.
+- [ ] Other: <!-- List other way(s) you've used generative AI for your project -->
+
+<!-- If you indicated Yes above for any generative AI usage, indicate which tool and model(s) you used, e.g., Codex extension in Positron with GPT-5.6 Sol High, claude.io web interface with Opus 5.5 Medium, etc. -->
